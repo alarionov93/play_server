@@ -1,0 +1,15 @@
+@(tasks: java.util.List[Task], taskForm: play.data.Form[Task])
+@import helper._
+
+@main("Todo list") {
+
+    <h1>@tasks.size() tasks.</h1>
+
+    <ul>
+        @for(task <- tasks) {
+            <li>@task.label</li>
+            @*//TODO: make form for adding new tasks*@
+        }
+    </ul>
+
+}
