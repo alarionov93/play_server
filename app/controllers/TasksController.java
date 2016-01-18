@@ -1,8 +1,13 @@
 package controllers;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import models.Task;
 import play.data.Form;
 import play.mvc.*;
+import com.fasterxml.jackson.core.*;
+
+import java.io.File;
+import java.util.List;
 
 public class TasksController extends Controller {
 
@@ -34,7 +39,21 @@ public class TasksController extends Controller {
 
     public static Result deleteTask(Long id) {
         Task.delete(id);
+
         return redirect(routes.TasksController.tasks());
+    }
+
+    public static Result jsonTasks() {
+        ObjectMapper mapper = new ObjectMapper();
+        List<Task> list = Task.all();
+        String json = "";
+        try {
+            json = mapper.writeValueAsString(list);
+        } catch (JsonProcessingException e) {
+            e.printStackTrace();
+        }
+
+        return ok(json);
     }
 
 }
