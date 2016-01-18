@@ -8,7 +8,8 @@ scalaVersion := "2.11.7"
 
 libraryDependencies ++= Seq( javaJdbc ,  cache , javaWs , javaEbean,
   "org.postgresql" % "postgresql" % "9.3-1102-jdbc4" ,
-  "javax.persistence" % "persistence-api" % "1.0.2"
+  "javax.persistence" % "persistence-api" % "1.0.2" ,
+  "org.avaje" % "ebean" % "2.8.1"
 )
 
 unmanagedResourceDirectories in Test <+=  baseDirectory ( _ /"target/web/public/test" )  

@@ -8,7 +8,8 @@
     <ul>
         @for(task <- tasks) {
             <li>@task.label
-                @form(routes.Application.deleteTask(task.id)) {
+                @form(routes.TasksController.deleteTask(task.id)) {
+                    <a href="task/@task.id">Show</a>
                     <input type="submit" value="Delete">
                 }
             </li>
@@ -16,7 +17,7 @@
         }
     </ul>
     <h2>Add new</h2>
-    @form(routes.Application.newTask()) {
+    @form(routes.TasksController.newTask()) {
         @inputText(field = taskForm("label"))
         <input type="submit" value="Create">
     }

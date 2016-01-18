@@ -22,13 +22,17 @@ public class Task extends Model{
     public static Finder<Long,Task> find;
 
     static {
-        find = new Finder(
+        find = new Finder<>(
                 Long.class, Task.class
         );
     }
 
     public static List<Task> all() {
         return find.all();
+    }
+
+    public static Task get(Long id) {
+        return find.byId(id);
     }
 
     public static void create(Task task) {

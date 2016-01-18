@@ -1,0 +1,19 @@
+@(books: java.util.List[Book])
+@import helper._
+
+@main("Todo list") {
+
+    <h1>@books.size() books.</h1>
+
+    <ul>
+    @for(book <- books) {
+        <li>@book.title
+
+        </li>
+        @*//TODO: make form for adding new books*@
+    }
+    </ul>
+    <h2>Add new</h2>
+
+
+}
