@@ -1,19 +1,25 @@
-@(books: java.util.List[Book])
+@(books: java.util.List[Book], bookForm: play.data.Form[Book])
 @import helper._
 
-@main("Todo list") {
-
+@main("Books list") {
+    <a href="tasks">Tasks</a>
     <h1>@books.size() books.</h1>
 
     <ul>
     @for(book <- books) {
         <li>@book.title
-
+            @form(routes.BooksController.deleteBook(book.id)) {
+                <a href="book/@book.id">Show this book</a>
+                <input type="submit" value="Delete">
+            }
         </li>
         @*//TODO: make form for adding new books*@
     }
     </ul>
     <h2>Add new</h2>
-
+    @form(routes.BooksController.newBook()) {
+        @inputText(field = bookForm("title"))
+        <input type="submit" value="Create">
+    }
 
 }

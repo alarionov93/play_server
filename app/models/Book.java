@@ -14,10 +14,10 @@ public class Book extends Model {
     @Id
     public Long id;
 
+    @Required
     public String title;
 
-    @Required
-    public Date date;
+    public Date date = new Date();
 
     public static Finder<Long, Book> find;
 

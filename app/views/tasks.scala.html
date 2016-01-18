@@ -1,15 +1,15 @@
 @(tasks: java.util.List[Task], taskForm: play.data.Form[Task])
 @import helper._
 
-@main("Todo list") {
-
+@main("Tasks list") {
+    <a href="books">Books</a>
     <h1>@tasks.size() tasks.</h1>
 
     <ul>
         @for(task <- tasks) {
             <li>@task.label
                 @form(routes.TasksController.deleteTask(task.id)) {
-                    <a href="task/@task.id">Show</a>
+                    <a href="task/@task.id">Show this task</a>
                     <input type="submit" value="Delete">
                 }
             </li>

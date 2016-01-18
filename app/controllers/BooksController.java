@@ -1,23 +1,41 @@
 package controllers;
 
 import models.Book;
-import play.mvc.*;
 import play.data.Form;
+import play.mvc.Result;
+import play.mvc.Results.*;
 
+import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
+import static play.mvc.Results.redirect;
 
-/**
- * Created by sanya on 19.01.16.
- */
+
 public class BooksController {
 
-    static play.data.Form<Book> taskForm = play.data.Form.form(Book.class);
+    static play.data.Form<Book> bookForm = play.data.Form.form(Book.class);
 
     public static Result book(Long id) {
         return ok(views.html.book.render(Book.get(id)));
     }
 
     public static Result books() {
-        return ok(views.html.books.render(Book.all()));
+        return ok(views.html.books.render(Book.all(), bookForm));
+    }
+
+    public static Result newBook() {
+        Form<Book> filled = bookForm.bindFromRequest();
+        if (filled.hasErrors()) {
+            return badRequest(
+                    views.html.books.render(Book.all(), filled)
+            );
+        } else {
+            Book.create(filled.get());
+            return redirect(routes.BooksController.books());
+        }
+    }
+
+    public static Result deleteBook(Long id) {
+        Book.delete(id);
+        return redirect(routes.BooksController.books());
     }
 }

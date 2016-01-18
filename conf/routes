@@ -13,8 +13,8 @@ GET     /task/:id                   controllers.TasksController.task(id: Long)
 
 #Books
 GET     /books                      controllers.BooksController.books()
-#POST    /books                      controllers.BooksController.newBook()
-#GET     /book/:id/delete            controllers.BooksController.deleteBook(id: Long)
+POST    /books                      controllers.BooksController.newBook()
+GET     /book/:id/delete            controllers.BooksController.deleteBook(id: Long)
 GET     /book/:id                   controllers.BooksController.book(id: Long)
 
 # Map static resources from the /public folder to the /assets URL path
