@@ -1,7 +1,5 @@
 package models;
 
-import play.api.data.*;
-import play.db.ebean.*;
 import javax.persistence.*;
 import play.data.validation.Constraints.*;
 import java.util.*;
@@ -11,15 +9,12 @@ import java.util.*;
  */
 
 @Entity
-public class Task extends Model{
-
-    @Id
-    public Long id;
+public class Task extends Printed {
 
     @Required
     public String label;
 
-    public static Finder<Long,Task> find;
+    public static Finder<Long, Task> find;
 
     static {
         find = new Finder<>(

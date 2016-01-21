@@ -3,7 +3,6 @@ package controllers;
 import models.Book;
 import play.data.Form;
 import play.mvc.Result;
-import play.mvc.Results.*;
 
 import static play.mvc.Results.badRequest;
 import static play.mvc.Results.ok;
@@ -37,5 +36,18 @@ public class BooksController {
     public static Result deleteBook(Long id) {
         Book.delete(id);
         return redirect(routes.BooksController.books());
+    }
+
+    //TODO: use form, such as in newBook() method to change book!
+    public static Result updateBook(Long id) {
+        Form<Book> filled = bookForm.bindFromRequest();
+        if (!filled.hasErrors()) {
+            Book.change(id, filled.get());
+            return redirect(routes.BooksController.books());
+        } else {
+            return badRequest(
+                    views.html.books.render(Book.all(), filled)
+            );
+        }
     }
 }

@@ -9,16 +9,34 @@
     @for(book <- books) {
         <li>@book.title
             @form(routes.BooksController.deleteBook(book.id)) {
-                <a href="book/@book.id">Show this book</a>
+                <a href="/book/@book.id">Show this book</a>
+                @*<input type="text" value="@book.title">*@
                 <input type="submit" value="Delete">
             }
         </li>
-        @*//TODO: make form for adding new books*@
+        @*//TODO: make form for changing books here!*@
     }
     </ul>
+    <button id="ch_btn">Changing books</button>
+    <div id="change">
+        <h2>Change</h2>
+        <ul>
+            @for(book <- books) {
+                <li>@book.title
+                @form(routes.BooksController.updateBook(book.id)) {
+                    @inputText(field = bookForm("title"))
+                    @inputDate(field = bookForm("date"))
+                    @inputText(field = bookForm("numberOfPages"))
+                    <input type="submit" value="Update">
+                }</li>
+            }
+        </ul>
+    </div>
     <h2>Add new</h2>
     @form(routes.BooksController.newBook()) {
         @inputText(field = bookForm("title"))
+        @inputDate(field = bookForm("date"))
+        @inputText(field = bookForm("numberOfPages"))
         <input type="submit" value="Create">
     }
 

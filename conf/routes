@@ -10,14 +10,15 @@ GET     /tasks                      controllers.TasksController.tasks()
 POST    /tasks                      controllers.TasksController.newTask()
 GET     /task/:id/delete            controllers.TasksController.deleteTask(id: Long)
 GET     /task/:id                   controllers.TasksController.task(id: Long)
+GET     /json                       controllers.TasksController.jsonTasks()
 
 #Books
 GET     /books                      controllers.BooksController.books()
 POST    /books                      controllers.BooksController.newBook()
 GET     /book/:id/delete            controllers.BooksController.deleteBook(id: Long)
 GET     /book/:id                   controllers.BooksController.book(id: Long)
+POST    /book/:id/change            controllers.BooksController.updateBook(id: Long)
 
-GET     /json                       controllers.TasksController.jsonTasks()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
