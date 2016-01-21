@@ -2,8 +2,11 @@
 @import helper._
 
 @main("Books list") {
-    <a href="tasks">Tasks</a>
+    <a href="@routes.TasksController.tasks()">Tasks</a>
+    <a href="@routes.ArticlesController.articles()">Articles</a>
+
     <h1>@books.size() books.</h1>
+    <a href="@routes.BooksController.newBook()">Add new</a>
 
     <ul>
     @for(book <- books) {
@@ -22,22 +25,14 @@
         <h2>Change</h2>
         <ul>
             @for(book <- books) {
-                <li>@book.title
+                <li>
                 @form(routes.BooksController.updateBook(book.id)) {
-                    @inputText(field = bookForm("title"))
-                    @inputDate(field = bookForm("date"))
-                    @inputText(field = bookForm("numberOfPages"))
+                    <input type="text" id="title" name="title" value="@book.title">
+                    <input type="date" id="date" name="date" value="@book.date__str()">
+                    <input type="text" id="numberOfPages" name="numberOfPages" value="@book.numberOfPages">
                     <input type="submit" value="Update">
                 }</li>
             }
         </ul>
     </div>
-    <h2>Add new</h2>
-    @form(routes.BooksController.newBook()) {
-        @inputText(field = bookForm("title"))
-        @inputDate(field = bookForm("date"))
-        @inputText(field = bookForm("numberOfPages"))
-        <input type="submit" value="Create">
-    }
-
 }

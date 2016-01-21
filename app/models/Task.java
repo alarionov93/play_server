@@ -11,7 +11,6 @@ import java.util.*;
 @Entity
 public class Task extends Printed {
 
-    @Required
     public String label;
 
     public static Finder<Long, Task> find;

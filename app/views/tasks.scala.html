@@ -2,12 +2,15 @@
 @import helper._
 
 @main("Tasks list") {
-    <a href="books">Books</a>
+    <a href="@routes.BooksController.books()">Books</a>
+    <a href="@routes.ArticlesController.articles()">Articles</a>
+
     <h1>@tasks.size() tasks.</h1>
+    <a href="@routes.TasksController.newTask()">Add new</a>
 
     <ul>
         @for(task <- tasks) {
-            <li>@task.label
+            <li>@task.title
                 @form(routes.TasksController.deleteTask(task.id)) {
                     <a href="task/@task.id">Show this task</a>
                     <input type="submit" value="Delete">
@@ -17,7 +20,7 @@
     </ul>
     <h2>Add new</h2>
     @form(routes.TasksController.newTask()) {
-        @inputText(field = taskForm("label"))
+        @inputText(field = taskForm("title"))
         <input type="submit" value="Create">
     }
 

@@ -14,7 +14,9 @@ public class Article extends Printed {
     @Required
     public String title;
 
-    public Date date = new Date();
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="id", referencedColumnName="id")
+    public Magazine magazine;
 
     public static Finder<Long, Article> find;
 
@@ -36,11 +38,14 @@ public class Article extends Printed {
         article.save();
     }
 
+    public static void change(Long id, Article updated) {
+        //TODO: make it more convenient!
+        Article articleToUpdate = find.byId(id);
+        articleToUpdate.title = updated.title;
+        articleToUpdate.save();
+    }
+
     public static void delete(Long id) {
         find.ref(id).delete();
     }
-
-//    public static List<Article> allFromYear(Date date) {
-//        return find.where("date="+new Date().toString()).findList();
-//    }
 }

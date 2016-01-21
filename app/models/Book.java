@@ -10,12 +10,7 @@ import java.util.*;
 
 @Entity
 public class Book extends Printed {
-
-    @Required
-    public String title;
-
-    public Date date = new Date();
-
+    
     public static Finder<Long, Book> find;
 
     static {
@@ -33,7 +28,7 @@ public class Book extends Printed {
     } //this is used for creating Book from json string, now is not needed no more
 
     public static List<Book> all() {
-        return find.all();
+        return find.where().orderBy("id asc").findList();
     }
 
     public static Book get(Long id) {
@@ -46,11 +41,11 @@ public class Book extends Printed {
 
     public static void change(Long id, Book updated) {
         Book bookToUpdate = find.byId(id);
-        if (updated.title != null) {//TODO: make it more convenient!
-            bookToUpdate.title = updated.title;
-            bookToUpdate.numberOfPages = updated.numberOfPages;
-            bookToUpdate.date = updated.date;
-        }
+//        if (updated.title != null) {//TODO: make it more convenient!
+////            bookToUpdate.numberOfPages = updated.numberOfPages;
+////            bookToUpdate.date = updated.date;
+//        }
+        bookToUpdate.title = updated.title;
         bookToUpdate.save();
     }
 

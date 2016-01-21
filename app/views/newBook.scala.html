@@ -1,0 +1,12 @@
+@(bookForm: play.data.Form[Book])
+@import helper._
+
+@main("Add new") {
+    <h2>Add new</h2>
+    @form(routes.BooksController.addBook()) {
+        @inputText(field = bookForm("title"))
+        @inputDate(field = bookForm("date"))
+        @inputText(field = bookForm("numberOfPages"))
+        <input type="submit" value="Create">
+    }
+}

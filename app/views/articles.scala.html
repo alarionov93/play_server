@@ -1,0 +1,39 @@
+@(articles: java.util.List[Article], articleForm: play.data.Form[Article])
+@import helper._
+
+@main("Articles list") {
+    <a href="@routes.TasksController.tasks()">Tasks</a>
+    <a href="@routes.BooksController.books()">Books</a>
+
+    <h1>@articles.size() articles.</h1>
+    <a href="@routes.ArticlesController.newArticle()">Add new</a>
+
+    <ul>
+    @for(article <- articles) {
+        <li>@article.title
+            @form(routes.ArticlesController.deleteArticle(article.id)) {
+                <a href="/article/@article.id">Show this article</a>
+                @*<input type="text" value="@article.title">*@
+                <input type="submit" value="Delete">
+                }
+        </li>
+        @*//TODO: make form for changing articles here!*@
+    }
+    </ul>
+    <button id="ch_btn">Changing articles</button>
+    <div id="change">
+        <h2>Change</h2>
+        <ul>
+        @for(article <- articles) {
+            <li>
+            @form(routes.ArticlesController.updateArticle(article.id)) {
+                <input type="text" id="title" name="title" value="@article.title">
+                <input type="date" id="date" name="date" value="@article.date__str()">
+                <input type="text" id="numberOfPages" name="numberOfPages" value="@article.numberOfPages">
+                <input type="submit" value="Update">
+                }
+            </li>
+        }
+        </ul>
+    </div>
+}

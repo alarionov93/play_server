@@ -14,11 +14,19 @@ GET     /json                       controllers.TasksController.jsonTasks()
 
 #Books
 GET     /books                      controllers.BooksController.books()
-POST    /books                      controllers.BooksController.newBook()
+GET     /books/new                  controllers.BooksController.newBook()
 GET     /book/:id/delete            controllers.BooksController.deleteBook(id: Long)
 GET     /book/:id                   controllers.BooksController.book(id: Long)
 POST    /book/:id/change            controllers.BooksController.updateBook(id: Long)
+POST    /book/add                   controllers.BooksController.addBook()
 
+#Articles
+GET     /articles                      controllers.ArticlesController.articles()
+GET     /articles/new                  controllers.ArticlesController.newArticle()
+GET     /article/:id/delete            controllers.ArticlesController.deleteArticle(id: Long)
+GET     /article/:id                   controllers.ArticlesController.article(id: Long)
+POST    /article/:id/change            controllers.ArticlesController.updateArticle(id: Long)
+POST    /article/add                   controllers.ArticlesController.addArticle()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)
