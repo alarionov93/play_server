@@ -11,11 +11,12 @@ import java.util.*;
 @Entity
 public class Article extends Printed {
 
-    @Required
-    public String title;
+//    public Article(String title) {
+//        this.title = title;
+//    }
 
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="id", referencedColumnName="id")
+    @JoinColumn(name="magazine_id", referencedColumnName="id")
     public Magazine magazine;
 
     public static Finder<Long, Article> find;
@@ -34,7 +35,10 @@ public class Article extends Printed {
         return find.byId(id);
     }
 
-    public static void create(Article article) {
+    public static void create(Article article, Magazine magazine) {
+//        Magazine magazine = new Magazine(magazine_name);
+        article.magazine = magazine;
+        magazine.articles.add(article);
         article.save();
     }
 
@@ -42,6 +46,7 @@ public class Article extends Printed {
         //TODO: make it more convenient!
         Article articleToUpdate = find.byId(id);
         articleToUpdate.title = updated.title;
+        articleToUpdate.magazine = updated.magazine;
         articleToUpdate.save();
     }
 

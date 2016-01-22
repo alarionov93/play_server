@@ -8,6 +8,7 @@ create table article (
   title                     varchar(255),
   date                      timestamp,
   number_of_pages           integer,
+  magazine_id               bigint,
   constraint pk_article primary key (id))
 ;
 
@@ -44,8 +45,8 @@ create sequence magazine_seq;
 
 create sequence task_seq;
 
-alter table article add constraint fk_article_magazine_1 foreign key (id) references magazine (id);
-create index ix_article_magazine_1 on article (id);
+alter table article add constraint fk_article_magazine_1 foreign key (magazine_id) references magazine (id);
+create index ix_article_magazine_1 on article (magazine_id);
 
 
 

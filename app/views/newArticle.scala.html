@@ -1,10 +1,11 @@
-@(articleForm: play.data.Form[Article])
+@(articleForm: play.data.Form[Article], magazineForm: play.data.Form[Magazine])
 @import helper._
 
 @main("Add new") {
     <h2>Add new</h2>
     @form(routes.ArticlesController.addArticle()) {
         @inputText(field = articleForm("title"))
+        @inputText(field = articleForm("magazine"))
         @inputDate(field = articleForm("date"))
         @inputText(field = articleForm("numberOfPages"))
         <input type="submit" value="Create">

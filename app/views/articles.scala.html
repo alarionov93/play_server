@@ -1,4 +1,4 @@
-@(articles: java.util.List[Article], articleForm: play.data.Form[Article])
+@(articles: java.util.List[Article], articleForm: play.data.Form[Article], magazines: java.util.List[models.Magazine])
 @import helper._
 
 @main("Articles list") {
@@ -11,6 +11,7 @@
     <ul>
     @for(article <- articles) {
         <li>@article.title
+            <p>From: @article.magazine.title</p>
             @form(routes.ArticlesController.deleteArticle(article.id)) {
                 <a href="/article/@article.id">Show this article</a>
                 @*<input type="text" value="@article.title">*@
@@ -28,6 +29,12 @@
             <li>
             @form(routes.ArticlesController.updateArticle(article.id)) {
                 <input type="text" id="title" name="title" value="@article.title">
+                <select name="magazine" id="magazine">
+                    @for(magazine <- magazines) {
+                        <option value="@magazine.title">@magazine.title</option>
+                    }
+                </select>
+                @*<input type="text" id="title" name="title" value="@article.magazine.title">*@
                 <input type="date" id="date" name="date" value="@article.date__str()">
                 <input type="text" id="numberOfPages" name="numberOfPages" value="@article.numberOfPages">
                 <input type="submit" value="Update">
