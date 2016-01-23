@@ -4,6 +4,7 @@ import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import java.util.List;
 
@@ -13,9 +14,12 @@ import java.util.List;
 @Entity
 public class Magazine extends Printed {
 
-    public Magazine(String title) {
-        this.title = title; //TODO: set number of pages
-    }
+//    public Magazine(String title) { //TODO: CRITICAL !!!prevent saving new Magazine on update article operation!!!
+//        this.title = title; //TODO: set number of pages
+//    }
+
+    @Id
+    public Long id; //fields can not be even protected !!
 
     @OneToMany()
     public List<Article> articles;
@@ -42,9 +46,13 @@ public class Magazine extends Printed {
 
     public static void change(Long id, Magazine updated) {
         //TODO: make it more convenient!
-        Magazine magazineToUpdate = find.byId(id);
-        magazineToUpdate.title = updated.title;
-        magazineToUpdate.save();
+        if(updated.title.length() > 0 && updated.date != null && updated.numberOfPages > 0) {
+            Magazine magazineToUpdate = find.byId(id);
+            magazineToUpdate.title = updated.title;
+            magazineToUpdate.date = updated.date;
+            magazineToUpdate.numberOfPages = updated.numberOfPages;
+            magazineToUpdate.save();
+        }
     }
 
     public static void delete(Long id) {

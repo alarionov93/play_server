@@ -11,6 +11,9 @@ import java.util.*;
 @Entity
 public class Task extends Printed {
 
+    @Id
+    public Long id; //fields can not be even protected !!
+
     public String label;
 
     public static Finder<Long, Task> find;

@@ -4,6 +4,7 @@
 @main("Articles list") {
     <a href="@routes.TasksController.tasks()">Tasks</a>
     <a href="@routes.BooksController.books()">Books</a>
+    <a href="@routes.MagazinesController.magazines()">Magazines</a>
 
     <h1>@articles.size() articles.</h1>
     <a href="@routes.ArticlesController.newArticle()">Add new</a>
@@ -29,10 +30,10 @@
             <li>
             @form(routes.ArticlesController.updateArticle(article.id)) {
                 <input type="text" id="title" name="title" value="@article.title">
-                <select name="magazine" id="magazine">
-                    @for(magazine <- magazines) {
-                        <option value="@magazine.title">@magazine.title</option>
-                    }
+                <select name="magazine_id" id="magazine_id">
+                @for(magazine <- magazines) {
+                    <option value="@magazine.id">@magazine.title</option>
+                }
                 </select>
                 @*<input type="text" id="title" name="title" value="@article.magazine.title">*@
                 <input type="date" id="date" name="date" value="@article.date__str()">

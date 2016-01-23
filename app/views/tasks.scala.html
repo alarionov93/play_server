@@ -4,9 +4,10 @@
 @main("Tasks list") {
     <a href="@routes.BooksController.books()">Books</a>
     <a href="@routes.ArticlesController.articles()">Articles</a>
+    <a href="@routes.MagazinesController.magazines()">Magazines</a>
 
     <h1>@tasks.size() tasks.</h1>
-    <a href="@routes.TasksController.newTask()">Add new</a>
+    @*<a href="@routes.TasksController.newTask()">Add new</a>*@
 
     <ul>
         @for(task <- tasks) {

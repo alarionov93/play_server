@@ -1,11 +1,20 @@
-@(articleForm: play.data.Form[Article], magazineForm: play.data.Form[Magazine])
+@(articleForm: play.data.Form[Article], magazines: java.util.List[Magazine])
 @import helper._
 
 @main("Add new") {
     <h2>Add new</h2>
     @form(routes.ArticlesController.addArticle()) {
         @inputText(field = articleForm("title"))
-        @inputText(field = articleForm("magazine"))
+        @*inputText(field = articleForm("magazine")) @* //TODO: make select options for magazine!*@
+        <label for="magazine_id">magazine</label>
+        <dd>
+            <select name="magazine_id" id="magazine_id">
+                @for(magazine <- magazines) {
+                    <option value="@magazine.id">@magazine.title</option>
+                }
+            </select>
+        </dd>
+@*//        @select(field = articleForm("magazine"), options = options())*@
         @inputDate(field = articleForm("date"))
         @inputText(field = articleForm("numberOfPages"))
         <input type="submit" value="Create">

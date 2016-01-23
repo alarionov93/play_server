@@ -1,0 +1,22 @@
+@(magazine: Magazine)
+@import helper._
+
+    <p>@magazine.title</p>
+    Articles:
+    <ul>
+    @if(magazine.articles.size() > 0) {
+        @for(article <- magazine.articles) {
+            <li>
+            <p>@article.title</p>
+                @form(routes.ArticlesController.deleteArticle(article.id)) {
+                    <a href="/article/@article.id">Show this article</a>
+                    <input type="submit" value="Delete">
+                }
+            </li>
+        }
+    } else {
+        <p>Nothing to show!</p>
+    }
+    </ul>
+    <p>Pages: @magazine.numberOfPages</p>
+    Added: @magazine.date__str()

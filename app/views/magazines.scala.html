@@ -1,0 +1,45 @@
+@(magazineForm: play.data.Form[Magazine], magazines: java.util.List[models.Magazine])
+@import helper._
+
+@main("Articles list") {
+    <a href="@routes.TasksController.tasks()">Tasks</a>
+    <a href="@routes.BooksController.books()">Books</a>
+    <a href="@routes.ArticlesController.articles()">Articles</a>
+
+    <h1>@magazines.size() magazines.</h1>
+    <a href="@routes.MagazinesController.newMagazine()">Add new</a>
+
+    <ul>
+    @for(magazine <- magazines) {
+        <li>
+            <p>@magazine.title</p>
+            @form(routes.MagazinesController.deleteMagazine(magazine.id)) {
+                <a href="/magazine/@magazine.id">Show this magazine</a>
+                <input type="submit" value="Delete">
+                }
+        </li>
+    }
+    </ul>
+    <button id="ch_btn">Changing magazines</button>
+    <div id="change">
+        <h2>Change</h2>
+        <ul>
+        @for(magazine <- magazines) {
+            <li>
+            @form(routes.MagazinesController.updateMagazine(magazine.id)) {
+                <input type="text" id="title" name="title" value="@magazine.title">
+                @*<select name="magazine" id="magazine">
+                    @for(magazine <- magazines) {
+                        <option value="@magazine.title">@magazine.title</option>
+                    }
+                </select>*@
+                @*<input type="text" id="title" name="title" value="@article.magazine.title">*@
+                <input type="date" id="date" name="date" value="@magazine.date__str()">
+                <input type="text" id="numberOfPages" name="numberOfPages" value="@magazine.numberOfPages">
+                <input type="submit" value="Update">
+                }
+            </li>
+        }
+        </ul>
+    </div>
+}

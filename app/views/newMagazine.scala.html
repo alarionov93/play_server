@@ -1,0 +1,12 @@
+@(magazineForm: play.data.Form[Magazine])
+@import helper._
+
+@main("Add new") {
+    <h2>Add new</h2>
+    @form(routes.MagazinesController.addMagazine()) {
+        @inputText(field = magazineForm("title"))
+        @inputDate(field = magazineForm("date"))
+        @inputText(field = magazineForm("numberOfPages"))
+        <input type="submit" value="Create">
+    }
+}

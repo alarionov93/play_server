@@ -28,5 +28,13 @@ GET     /article/:id                   controllers.ArticlesController.article(id
 POST    /article/:id/change            controllers.ArticlesController.updateArticle(id: Long)
 POST    /article/add                   controllers.ArticlesController.addArticle()
 
+#Magazines
+GET     /magazines                      controllers.MagazinesController.magazines()
+GET     /magazines/new                  controllers.MagazinesController.newMagazine()
+GET     /magazine/:id/delete            controllers.MagazinesController.deleteMagazine(id: Long)
+GET     /magazine/:id                   controllers.MagazinesController.magazine(id: Long)
+POST    /magazine/:id/change            controllers.MagazinesController.updateMagazine(id: Long)
+POST    /magazine/add                   controllers.MagazinesController.addMagazine()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

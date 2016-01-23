@@ -10,7 +10,10 @@ import java.util.*;
 
 @Entity
 public class Book extends Printed {
-    
+
+    @Id
+    public Long id; //fields can not be even protected !!
+
     public static Finder<Long, Book> find;
 
     static {
@@ -40,13 +43,13 @@ public class Book extends Printed {
     }
 
     public static void change(Long id, Book updated) {
-        Book bookToUpdate = find.byId(id);
-//        if (updated.title != null) {//TODO: make it more convenient!
-////            bookToUpdate.numberOfPages = updated.numberOfPages;
-////            bookToUpdate.date = updated.date;
-//        }
-        bookToUpdate.title = updated.title;
-        bookToUpdate.save();
+        if(updated.title.length() > 0 && updated.date != null && updated.numberOfPages > 0) { //TODO: make it more convenient!
+            Book bookToUpdate = find.byId(id);
+            bookToUpdate.title = updated.title;
+            bookToUpdate.date = updated.date;
+            bookToUpdate.numberOfPages = updated.numberOfPages;
+            bookToUpdate.save();
+        }
     }
 
     public static void delete(Long id) {
