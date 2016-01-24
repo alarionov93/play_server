@@ -6,6 +6,7 @@
 create table article (
   id                        bigint not null,
   title                     varchar(255),
+  j_date                    timestamp,
   date                      timestamp,
   number_of_pages           integer,
   magazine_id               bigint,
@@ -15,6 +16,7 @@ create table article (
 create table book (
   id                        bigint not null,
   title                     varchar(255),
+  j_date                    timestamp,
   date                      timestamp,
   number_of_pages           integer,
   constraint pk_book primary key (id))
@@ -23,6 +25,7 @@ create table book (
 create table magazine (
   id                        bigint not null,
   title                     varchar(255),
+  j_date                    timestamp,
   date                      timestamp,
   number_of_pages           integer,
   constraint pk_magazine primary key (id))
@@ -31,6 +34,7 @@ create table magazine (
 create table task (
   id                        bigint not null,
   title                     varchar(255),
+  j_date                    timestamp,
   date                      timestamp,
   number_of_pages           integer,
   label                     varchar(255),

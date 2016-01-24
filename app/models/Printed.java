@@ -1,11 +1,13 @@
 package models;
 
+//import org.joda.time.DateTime;
 import org.joda.time.DateTime;
 import org.joda.time.format.DateTimeFormat;
 import org.joda.time.format.DateTimeFormatter;
-import play.data.validation.Constraints.*;
+import play.data.format.Formats;
 import play.db.ebean.Model;
-import javax.persistence.*;
+
+import javax.persistence.MappedSuperclass;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -18,11 +20,18 @@ public abstract class Printed extends Model {
 
     public String title;
 
-    public DateTime date = new DateTime();
+    @Formats.DateTime(pattern="yyyy-MM-dd")
+    public DateTime jDate = new DateTime(); //TODO: do something with this - forms are getting invalid date error
+
+    public Date date = jDate.toDate();
+
+//    protected DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
+//    public DateTime date = formatter.parseDateTime(new DateTime().toString().split("T")[0]);
 
     public String date__str() {
         DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
-        DateTime dt = formatter.parseDateTime(date.toString().split("T")[0]);
+        String date = jDate.toString().split("T")[0];
+        DateTime dt = formatter.parseDateTime(date);
         return dt.toString().split("T")[0];
     }
 

@@ -1,5 +1,6 @@
 package models;
 
+import org.joda.time.DateTime;
 import play.data.validation.Constraints.*;
 import play.db.ebean.Model;
 
@@ -49,7 +50,8 @@ public class Magazine extends Printed {
         if(updated.title.length() > 0 && updated.date != null && updated.numberOfPages > 0) {
             Magazine magazineToUpdate = find.byId(id);
             magazineToUpdate.title = updated.title;
-            magazineToUpdate.date = updated.date;
+            magazineToUpdate.jDate = new DateTime(updated.date); //TODO: set such assignment as here in all models!!!
+            magazineToUpdate.date = magazineToUpdate.jDate.toDate();
             magazineToUpdate.numberOfPages = updated.numberOfPages;
             magazineToUpdate.save();
         }

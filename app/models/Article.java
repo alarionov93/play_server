@@ -24,6 +24,9 @@ public class Article extends Printed {
     @JoinColumn(name="magazine_id", referencedColumnName="id")
     public Magazine magazine;
 
+//    @Column(name="author")
+//    public String author;
+
     public static Finder<Long, Article> find;
 
     static {
