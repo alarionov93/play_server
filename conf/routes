@@ -36,5 +36,9 @@ GET     /magazine/:id                   controllers.MagazinesController.magazine
 POST    /magazine/:id/change            controllers.MagazinesController.updateMagazine(id: Long)
 POST    /magazine/add                   controllers.MagazinesController.addMagazine()
 
+#Sort printed by year
+POST    /printed/after                  controllers.PrintedController.getAllByYear()
+GET     /printed                        controllers.PrintedController.allByYear()
+
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file               controllers.Assets.at(path="/public", file)

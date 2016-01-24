@@ -1,0 +1,23 @@
+@(printed: java.util.TreeMap[Integer, Printed])
+@import helper._
+
+@main("Printed list") {
+    <a href="@routes.TasksController.tasks()">Tasks</a>
+    <a href="@routes.ArticlesController.articles()">Articles</a>
+    <a href="@routes.MagazinesController.magazines()">Magazines</a>
+
+    <h1>@printed.size() printed.</h1>
+    @*<a href="@routes.BooksController.newBook()">Add new</a>*@
+    @form(routes.PrintedController.getAllByYear()) {
+        <input type="date" id="date" name="date" value="">
+        <input type="submit" value="Get">
+    }
+
+    <ul>
+    @for((key, value) <- printed) {
+        <li>
+            @value.title
+        </li>
+    }
+    </ul>
+}

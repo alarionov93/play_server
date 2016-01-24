@@ -1,5 +1,6 @@
 package models;
 
+import org.joda.time.DateTime;
 import play.db.ebean.*;
 import javax.persistence.*;
 import play.data.validation.Constraints.*;
@@ -39,6 +40,8 @@ public class Book extends Printed {
     }
 
     public static void create(Book book) {
+        book.jDate = new DateTime(book.date); //TODO: set such assignment as here in all models!!!
+        book.date = book.jDate.toDate();
         book.save();
     }
 
@@ -46,7 +49,8 @@ public class Book extends Printed {
         if(updated.title.length() > 0 && updated.date != null && updated.numberOfPages > 0) { //TODO: make it more convenient!
             Book bookToUpdate = find.byId(id);
             bookToUpdate.title = updated.title;
-            bookToUpdate.date = updated.date;
+            bookToUpdate.jDate = new DateTime(updated.date); //TODO: set such assignment as here in all models!!!
+            bookToUpdate.date = bookToUpdate.jDate.toDate();
             bookToUpdate.numberOfPages = updated.numberOfPages;
             bookToUpdate.save();
         }

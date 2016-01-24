@@ -7,6 +7,7 @@ import play.db.ebean.Model;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -42,6 +43,8 @@ public class Magazine extends Printed {
     }
 
     public static void create(Magazine magazine) {
+        magazine.jDate = new DateTime(magazine.date);
+        magazine.date = magazine.jDate.toDate(); //TODO: make a subscriber to date field creation and update in Printed.class!!!
         magazine.save();
     }
 
@@ -50,7 +53,7 @@ public class Magazine extends Printed {
         if(updated.title.length() > 0 && updated.date != null && updated.numberOfPages > 0) {
             Magazine magazineToUpdate = find.byId(id);
             magazineToUpdate.title = updated.title;
-            magazineToUpdate.jDate = new DateTime(updated.date); //TODO: set such assignment as here in all models!!!
+            magazineToUpdate.jDate = new DateTime(updated.date); //TODO: set such assignment as here in all models.T.create and change!!!
             magazineToUpdate.date = magazineToUpdate.jDate.toDate();
             magazineToUpdate.numberOfPages = updated.numberOfPages;
             magazineToUpdate.save();

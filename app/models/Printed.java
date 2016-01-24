@@ -7,8 +7,10 @@ import org.joda.time.format.DateTimeFormatter;
 import play.data.format.Formats;
 import play.db.ebean.Model;
 
+import javax.persistence.Entity;
 import javax.persistence.MappedSuperclass;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -24,7 +26,7 @@ public abstract class Printed extends Model {
     public DateTime jDate = new DateTime(); //TODO: do something with this - forms are getting invalid date error
 
     public Date date = jDate.toDate();
-
+    //TODO: make a constructor with input date assignment!!!
 //    protected DateTimeFormatter formatter = DateTimeFormat.forPattern("yyyy-MM-dd");
 //    public DateTime date = formatter.parseDateTime(new DateTime().toString().split("T")[0]);
 
@@ -41,14 +43,5 @@ public abstract class Printed extends Model {
 
     static {
         find = new Finder<>(Long.class, Printed.class);
-    }
-
-    public List<Printed> getAllByYear(DateTime date) {
-        List<Printed> printedByYear;
-        SimpleDateFormat dateS = new SimpleDateFormat("yyyy-MM-dd");
-        dateS.format(date);
-        printedByYear = Printed.find.where().between("date", new DateTime(), date).findList();
-
-        return printedByYear;
     }
 }

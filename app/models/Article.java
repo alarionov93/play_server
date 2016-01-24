@@ -12,10 +12,6 @@ import java.util.*;
 @Entity
 public class Article extends Printed {
 
-//    public Article(String title) {
-//        this.title = title;
-//    }
-
     @Id
     @GeneratedValue(strategy=GenerationType.SEQUENCE)
     public Long id; //fields can not be even protected !!
@@ -45,6 +41,10 @@ public class Article extends Printed {
 
     public static void create(Article article, Long id) {
         Magazine magazine = Magazine.find.byId(id);
+//        DateTime jDate = new DateTime(article.date); //TODO: understand why this code did not work as it was desired!!!
+//        article.date = jDate.toDate(); //TODO: make a subscriber to date field creation and update in Printed.class?
+        article.jDate = new DateTime(article.date);
+        article.date = article.jDate.toDate();
         article.magazine = magazine;
         magazine.articles.add(article);
         article.save();
@@ -56,7 +56,8 @@ public class Article extends Printed {
             Article articleToUpdate = find.byId(id);
             Magazine magazine =  Magazine.find.byId(magazine_id);
             articleToUpdate.title = updated.title;
-            articleToUpdate.date = updated.date;
+            articleToUpdate.jDate = new DateTime(updated.date); //TODO: set such assignment as here in all models!!!
+            articleToUpdate.date = articleToUpdate.jDate.toDate();
             articleToUpdate.magazine = magazine;
             articleToUpdate.numberOfPages = updated.numberOfPages;
             articleToUpdate.save();
@@ -67,9 +68,5 @@ public class Article extends Printed {
 
     public static void delete(Long id) {
         find.ref(id).delete();
-    }
-
-    public List<Printed> byYear(DateTime dateTime) {
-        return super.getAllByYear(dateTime);
     }
 }

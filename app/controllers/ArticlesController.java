@@ -2,6 +2,8 @@ package controllers;
 
 import models.Article;
 import models.Magazine;
+import org.apache.xerces.impl.dv.xs.IntegerDV;
+import org.joda.time.DateTime;
 import play.data.DynamicForm;
 import play.data.Form;
 import play.mvc.Result;
